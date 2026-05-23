@@ -1,25 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    GameManager gameManager;
+
+    // Start is called before the first frame update
     void Start()
-    { GameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent < "GameManager" > ();
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
 
     private void OnTriggerEnter(Collider otherObject)
-    {if(otherObject.transform.tag == "player")
+    {
+        if (otherObject.transform.tag == "Player")
         {
             gameManager.currentPickups += 1;
-            Destroy(this.GameObject)
+            Destroy(this.gameObject);
         }
-
-
-    }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

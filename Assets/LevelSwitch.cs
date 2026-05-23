@@ -1,18 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement
+using UnityEngine.SceneManagement;
 
 public class LevelSwitch : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    GameManager gameManager;
+    public string nextLevel;
+
+    // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.FindGameOjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
-    private void unTriggerEnter(collider otherObject)
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider otherObject)
     {
-        
+        if (otherObject.transform.tag == "Player")
+        {
+            if (gameManager.levelComplete)
+            {
+                SceneManager.LoadScene(nextLevel);
+            }
+        }
     }
 }
